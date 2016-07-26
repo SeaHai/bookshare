@@ -1,0 +1,27 @@
+.userCtrl{
+  margin-top: 30px;
+}
+.userCtrl .tab-content{
+  background-color: #fff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  overflow: hidden;
+}
+.userCtrl .tab-content p{
+  border-bottom: 1px solid #ddd;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.userCtrl .content{
+  max-height: 300px;
+  overflow: auto;
+}
+.userCtrl .content p{
+   cursor:pointer; 
+}
+.userCtrl .content p:hover{
+  background-color: #eee;
+}

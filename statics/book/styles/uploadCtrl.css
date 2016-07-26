@@ -1,0 +1,28 @@
+.uploadCtrl{
+  padding-top: 20px;
+  max-height: 800px;
+  margin-top: 63px;
+}
+.uploadCtrl .tab-content{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  padding: 20px;
+}
+.uploadCtrl .control-label{
+  font-size: 20px;
+}
+.uploadCtrl .file-container{
+  position: relative;
+}
+.uploadCtrl input[type='file']{
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+.uploadCtrl .file-container .upload{
+  position: absolute;
+  right: 15px;
+  top: 0;
+  z-index: 2;
+}

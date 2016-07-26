@@ -1,0 +1,28 @@
+
+.loginCtrl .content-left img{
+  margin: 0 auto;
+  max-width: 100%;
+}
+.loginCtrl .content-left div{
+  writing-mode:tb-rl;
+  position: absolute;
+  top: 10%;
+  font-size: 21px;
+  height: 100%;
+}
+.loginCtrl .content-left div>p{
+  position: absolute;
+  bottom: 20%;
+}
+.loginCtrl .content-text-1{
+  right: 17%;
+}
+.loginCtrl .content-text-2{
+  right: 28%;
+}
+.loginCtrl .content-right{
+  padding: 15% 0;
+}
+.loginCtrl .content-logout{
+  margin-top: 8%;
+}

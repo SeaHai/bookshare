@@ -1,0 +1,55 @@
+h4.nav-title{
+  margin: 10px;
+  margin-left: 120px;
+  color: #fff;
+}
+.manageCtrl{
+  margin-top: 30px;
+}
+.manageCtrl .manage-tabs{
+  padding: 10px;
+  height: 350px;
+  /*width: 15%;*/
+  margin-right: 20px;
+}
+.manageCtrl .manage-content{
+  background-color: #fff;
+  min-width: 80%;
+}
+.manageCtrl .manage-content td,
+.manageCtrl .manage-content th{
+  padding: 5px;
+}
+.manageCtrl .manage-content tbody{
+  font-size: 12px;
+}
+.manageCtrl .nav-tabs{
+  border-bottom: none;
+}
+.manageCtrl .nav-tabs>li{
+  float: none;
+  font-size: 22px;
+}
+.manageCtrl .tab-pane{
+  padding: 10px;
+}
+.manageCtrl .manage-content td .form-control{
+  height: 30px;
+  font-size: 12px;
+  padding: 0;
+}
+
+.manageCtrl .file-container{
+  position: relative;
+}
+.manageCtrl input[type='file']{
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+.manageCtrl .file-container .upload{
+  position: absolute;
+  right: 15px;
+  top: 0;
+  z-index: 2;
+}

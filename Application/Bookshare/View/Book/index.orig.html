@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, minimal-ui" />
+  <base href="/" />
+  <title>Bookshare</title>
+</head>
+<body>
+  <div ui-view></div>
+
+  {% for (var chunk in o.htmlWebpackPlugin.files.chunks) { %}
+  <script src="{%=o.htmlWebpackPlugin.files.chunks[chunk].entry %}"></script>
+  {% } %}
+</body>
+</html>

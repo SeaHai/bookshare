@@ -1,0 +1,29 @@
+.wtitle,[wtitle]{
+  display: none;
+}
+body{
+  color: #333;
+  font-size: 14px;
+  line-height: 1.428571;
+  background-color: #eee;
+}
+a{
+  color: #333;
+}
+.navbar-brand{
+  background-image: url(../images/logo.jpg);
+  margin-left: 21px;
+  width: 120px;
+}
+.navbar-btn{
+  margin-left:1em;
+  margin-right:1em;
+}
+.panel{
+  padding: 0;
+}
+
+pre{
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}

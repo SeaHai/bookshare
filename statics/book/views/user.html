@@ -1,0 +1,119 @@
+<div class="wtitle">个人中心</div>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" ui-sref="book.home"></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.register">注册</button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.login">登录</button>
+        </li>
+        <li><a ui-sref="book.home">首页</a></li>
+        <li class="active"><a href="#" ng-click="goUserDetail()">个人中心</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助 <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="book.upload" title="若未登录，上传功能不可使用">上传</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页下载;若未登录，下载功能不可使用">下载</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页评论;若未登录，评论功能不可使用">评论</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="navbar-form navbar-left" action="#" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="input-group-btn">
+                  <button type="submit" class="btn"><span class="fui-search"></span></button>
+            </span>
+          </div>
+        </div>
+      </form> -->
+      <p class="navbar-text navbar-right" ng-if="!user.uid">未<a ui-sref="book.login" class="navbar-link">登录</a></p>
+      <p class="navbar-text navbar-right" ng-if="user.uid"><span class="text-danger" ui-sref="book.userDetail" style="cursor:pointer">{{user.username}}</span>，欢迎你</p>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+<div class="jumbotron userCtrl">
+  <div class="container">
+    <div class="row">
+      <h6>昵称：{{user.username}}</h6>
+    </div>
+    <div class="row">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#book" aria-controls="book" role="tab" data-toggle="tab"><h6>我的书籍</h6></a></li>
+        <li role="presentation"><a href="#note" aria-controls="note" role="tab" data-toggle="tab"><h6>我的笔记</h6></a></li>
+        <li role="presentation"><a href="#comment" aria-controls="comment" role="tab" data-toggle="tab"><h6>我的评论</h6></a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="book">
+          <p class="row">
+            <strong class="col-sm-7">书名</strong>
+            <strong class="col-sm-5 text-right">分类</strong>
+          </p>
+          <div class="content">
+            <p ng-repeat="book in books" class="row" ng-click="goBookDetail(book)">
+              <span class="col-sm-7">{{book.name}}</span>
+              <small class="col-sm-5 text-right text-primary">{{book.cate}} <br><i class="text-right text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd hh:mm:ss'}}</i></small>
+              
+            </p>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="note">
+          <p class="row">
+            <strong class="col-sm-7">笔记名</strong>
+            <!-- <strong class="col-sm-5 text-right">分类</strong> -->
+          </p>
+          <div class="content">
+            <p ng-repeat="note in notes" class="row" ng-click="goNoteDetail(note)">
+              <span class="col-sm-7">{{note.name}}</span>
+              <i class="col-sm-5 text-right text-warning" style="font-size:10px">{{note.create_time*1000|date : 'yyyy-MM-dd hh:mm:ss'}}</i>
+              <!-- <small class="col-sm-5 text-right text-warning">{{book.cate}}</small> -->
+            </p>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="comment">
+          <div class="col-md-6">
+            <h6 class="text-primary">书籍评论</h6>
+            <p class="row">
+              <strong class="col-sm-7">评论内容</strong>
+              <strong class="col-sm-5 text-right">书名</strong>
+            </p>
+            <div class="content">
+              <p ng-repeat="bookcomment in bookcomments" class="row" ng-click="goBookDetail(bookcomment)">
+                <span class="col-sm-7">{{bookcomment.content| limitTo : 10}}<span ng-if="bookcomment.content.length>10">...</span></span>
+                <small class="col-sm-5 text-right text-primary">{{bookcomment.bookname}} <br><i class="text-right text-warning" style="font-size:10px">{{bookcomment.create_time*1000|date : 'yyyy-MM-dd hh:mm:ss'}}</i></small>
+              </p>
+            </div>  
+          </div>
+          <div class="col-md-6">
+            <h6 class="text-primary">笔记评论</h6>
+            <p class="row">
+              <strong class="col-sm-7">评论内容</strong>
+              <strong class="col-sm-5 text-right">笔记名</strong>
+            </p>
+            <div class="content">
+              <p ng-repeat="notecomment in notecomments" class="row" ng-click="goNoteDetail(notecomment)">
+                <span class="col-sm-7">{{notecomment.content| limitTo : 10}}<span ng-if="notecomment.content.length>10">...</span></span>
+                <small class="col-sm-5 text-right text-info">{{notecomment.notename}}<br><i class="text-right text-warning" style="font-size:10px">{{notecomment.create_time*1000|date : 'yyyy-MM-dd hh:mm:ss'}}</i></small>
+              </p>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

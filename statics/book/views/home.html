@@ -1,0 +1,150 @@
+<div class="wtitle">Bookshare</div>
+<!-- Static navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" ui-sref="book.home"></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.register">注册</button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.login">登录</button>
+        </li>
+        <li class="active"><a ui-sref="book.home">首页</a></li>
+        
+        <li><a href="#" ng-click="goUserDetail()">个人中心</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助 <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="book.upload" title="若未登录，上传功能不可使用">上传</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页下载;若未登录，下载功能不可使用">下载</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页评论;若未登录，评论功能不可使用">评论</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="navbar-form navbar-left" action="#" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="input-group-btn">
+                  <button type="submit" class="btn"><span class="fui-search"></span></button>
+            </span>
+          </div>
+        </div>
+      </form> -->
+      <p class="navbar-text navbar-right" ng-if="!user.uid">未<a ui-sref="book.login" class="navbar-link">登录</a></p>
+      <p class="navbar-text navbar-right" ng-if="user.uid"><span ui-sref="book.userDetail" class="text-danger" style="cursor:pointer">{{user.username}}</span>，欢迎你</p>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+<!-- banner -->
+<div class="banner">
+  <div class="text-container text-center">
+    <p>要么旅行，要么读书，身体和灵魂，总有一样在路上</p>
+    <p>而灵魂在路上，将会走得更远</p>
+  </div>
+</div>
+<!-- 正文 -->
+<div class="jumbotron homeCtrl">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 panel panel-warning">
+        <div class="panel-heading">
+          <h5>书籍</h5>
+        </div>
+        <div class="panel-body" style="max-height:800px;overflow:auto">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#cate-javascript" aria-controls="cate-javascript" role="tab" data-toggle="tab">javascript</a></li>
+            <li role="presentation"><a href="#cate-php" aria-controls="cate-php" role="tab" data-toggle="tab">php</a></li>
+            <li role="presentation"><a href="#cate-java" aria-controls="cate-java" role="tab" data-toggle="tab">java</a></li>
+            <li role="presentation"><a href="#cate-mysql" aria-controls="cate-mysql" role="tab" data-toggle="tab">mysql</a></li>
+            <li role="presentation"><a href="#cate-android" aria-controls="cate-android" role="tab" data-toggle="tab">android</a></li>
+            <li role="presentation"><a href="#cate-linux" aria-controls="cate-linux" role="tab" data-toggle="tab">linux</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="cate-javascript">
+              <div class="panel panel-default" ng-repeat="book in books" ng-if="book.cate=='javascript'" ng-click="goBookDetail(book)" style="cursor:pointer">
+                <div class="panel-heading">
+                  <strong class="book-name">{{book.name}}</strong>
+                  <em class="text-success pull-right text-right">{{book.username}}<br><i class="text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+                </div>
+                <div class="panel-body">{{book.intro| limitTo : 60}}<span ng-if="book.intro.length>60">...</span></div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cate-php">
+              <div class="panel panel-default" ng-repeat="book in books" ng-if="book.cate=='php'" ng-click="goBookDetail(book)" style="cursor:pointer">
+                <div class="panel-heading">
+                  <strong class="book-name">{{book.name}}</strong>
+                  <em class="text-success pull-right text-right">{{book.username}}<br><i class="text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+                </div>
+                <div class="panel-body">{{book.intro | limitTo : 60}}<span ng-if="book.intro.length>60">...</span></div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cate-java">
+              <div class="panel panel-default" ng-repeat="book in books" ng-if="book.cate=='java'" ng-click="goBookDetail(book)" style="cursor:pointer">
+                <div class="panel-heading">
+                  <strong class="book-name">{{book.name}}</strong>
+                  <em class="text-success pull-right text-right">{{book.username}}<br><i class="text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+                </div>
+                <div class="panel-body">{{book.intro| limitTo : 60}}<span ng-if="book.intro.length>60">...</span></div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cate-mysql">
+              <div class="panel panel-default" ng-repeat="book in books" ng-if="book.cate=='mysql'" ng-click="goBookDetail(book)" style="cursor:pointer">
+                <div class="panel-heading">
+                  <strong class="book-name">{{book.name}}</strong>
+                  <em class="text-success pull-right text-right">{{book.username}}<br><i class="text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+                </div>
+                <div class="panel-body">{{book.intro| limitTo : 60}}<span ng-if="book.intro.length>60">...</span></div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cate-android">
+              <div class="panel panel-default" ng-repeat="book in books" ng-if="book.cate=='android'" ng-click="goBookDetail(book)" style="cursor:pointer">
+                <div class="panel-heading">
+                  <strong class="book-name">{{book.name}}</strong>
+                  <em class="text-success pull-right text-right">{{book.username}}<br><i class="text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+                </div>
+                <div class="panel-body">{{book.intro| limitTo : 60}}<span ng-if="book.intro.length>60">...</span></div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="cate-linux">
+              <div class="panel panel-default" ng-repeat="book in books" ng-if="book.cate=='linux'" ng-click="goBookDetail(book)" style="cursor:pointer">
+                <div class="panel-heading">
+                  <strong class="book-name">{{book.name}}</strong>
+                  <em class="text-success pull-right text-right">{{book.username}}<br><i class="text-warning" style="font-size:10px">{{book.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+                </div>
+                <div class="panel-body">{{book.intro| limitTo : 60}}<span ng-if="book.intro.length>60">...</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-md-5 panel panel-info">
+        <div class="panel-heading">
+          <h5>笔记</h5>
+        </div>
+        <div class="panel-body" style="max-height:800px;overflow:auto">
+          <div class="panel panel-default" ng-repeat="note in notes" ng-click="goNoteDetail(note)" style="cursor:pointer">
+            <div class="panel-heading">
+              <strong class="note-name">{{note.name}}</strong>
+              <em class="text-success pull-right text-right">{{note.username}}<br><i class="text-warning" style="font-size:10px">{{note.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></em>
+            </div>
+            <!-- <div class="panel-body">{{note.intro}}</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

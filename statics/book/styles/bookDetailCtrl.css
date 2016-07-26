@@ -1,0 +1,26 @@
+.bookDetailCtrl{
+  margin-top: 63px;
+}
+.bookDetailCtrl .well{
+  background-color: #ffe;
+}
+.bookDetailCtrl .comment-container{
+  max-height: 500px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.bookDetailCtrl .comment-container p{
+  border-bottom: 1px solid #eee;
+}
+.bookDetailCtrl .comment-content{
+  max-height: 400px;
+  overflow: auto;
+}
+.bookDetailCtrl .comment-content .row{
+  margin-left: 0;
+  margin-right: 0;
+}
+.bookDetailCtrl #collapseExample,
+.bookDetailCtrl #myAlert{
+  margin-top: 20px;
+}

@@ -1,0 +1,27 @@
+.noteDetailCtrl{
+  margin-top: 63px;
+}
+.noteDetailCtrl .well{
+  background-color: #ffe;
+}
+.noteDetailCtrl .comment-container{
+  max-height: 500px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.noteDetailCtrl .comment-container p{
+  border-bottom: 1px solid #eee;
+}
+.noteDetailCtrl .comment-content{
+  max-height: 400px;
+  overflow: auto;
+}
+.noteDetailCtrl .comment-content .row{
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.noteDetailCtrl #collapseExample,
+.noteDetailCtrl #myAlert{
+  margin-top: 20px;
+}

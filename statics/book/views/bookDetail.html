@@ -1,0 +1,89 @@
+<div class="wtitle">书籍详情</div>
+<!-- 导航条 -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" ui-sref="book.home"></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.register">注册</button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.login">登录</button>
+        </li>
+        <li><a ui-sref="book.home">首页</a></li>
+        <li><a href="#" ng-click="goUserDetail()">个人中心</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助 <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="book.upload" title="若未登录，上传功能不可使用">上传</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页下载;若未登录，下载功能不可使用">下载</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页评论;若未登录，评论功能不可使用">评论</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="navbar-form navbar-left" action="#" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="input-group-btn">
+                  <button type="submit" class="btn"><span class="fui-search"></span></button>
+            </span>
+          </div>
+        </div>
+      </form> -->
+      <p class="navbar-text navbar-right" ng-if="!user.uid">未<a ui-sref="book.login" class="navbar-link">登录</a></p>
+      <p class="navbar-text navbar-right" ng-if="user.uid"><span class="text-danger" ui-sref="book.userDetail" style="cursor:pointer">{{user.username}}</span>，欢迎你</p>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+
+
+<div class="bookDetailCtrl">
+  <div class="panel panel-success container">
+    <div class="panel-heading">
+      <h4 class="text-center">{{book.name}}</h4>
+    </div>
+    <div class="panel-body"><pre>{{book.intro}}</pre></div>
+    <div class="panel-footer">
+      <div class="row">
+        <button class="btn btn-success col-sm-2 col-sm-offset-2" ui-sref="book.upload" ng-disabled="!user">上传</button>
+        <a class="btn btn-info col-sm-2 col-sm-offset-4" ng-disabled="!user" href="http://localhost{{book.url}}" download>下载</a>
+      </div>
+      
+    </div>
+  </div>
+  <div class="container well">
+    <h5 class="text-primary">讨论区</h5>
+    <div class="comment-container">
+      <p class="row">
+        <strong class="col-sm-1">#</strong>
+        <strong class="col-sm-9">内容</strong>
+        <strong class="text-center col-sm-2">昵称</strong>
+      </p>
+      <div class="comment-content">
+        <p class="row" ng-repeat="bookcomment in bookcomments">
+          <small class="col-sm-1">{{bookCommentLen-$index}}</small>
+          <small class="col-sm-9">{{bookcomment.content}}</small>
+          <small class="text-center text-info col-sm-2">{{bookcomment.username}} <i class="text-warning" style="font-size:10px">{{bookcomment.create_time*1000|date : 'yyyy-MM-dd HH:mm:ss'}}</i></small>
+
+        </p>
+      </div>
+      <div class="row">
+        <button class="btn btn-primary col-sm-1 col-sm-offset-10" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" ng-disabled="!user">评论</button>
+      </div>
+    </div>
+    <div class="collapse" id="collapseExample">
+      <div class="well">
+        <textarea class="form-control" rows="3" ng-model="commentContent" placeholder="评论内容长度在200个字符以内"></textarea>
+      </div>
+      <button class="btn btn-success" ng-click="addComment()">发布评论</button>
+    </div>
+  </div>
+</div>

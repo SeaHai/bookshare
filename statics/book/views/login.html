@@ -1,0 +1,103 @@
+<div class="wtitle">登录</div>
+<!-- 导航条 -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" ui-sref="book.home"></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.register">注册</button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.login">登录</button>
+        </li>
+        <li><a ui-sref="book.home">首页</a></li>
+        <li><a href="#" ng-click="goUserDetail()">个人中心</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助 <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="book.upload" title="若未登录，上传功能不可使用">上传</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页下载;若未登录，下载功能不可使用">下载</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页评论;若未登录，评论功能不可使用">评论</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="navbar-form navbar-left" action="#" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="input-group-btn">
+                  <button type="submit" class="btn"><span class="fui-search"></span></button>
+            </span>
+          </div>
+        </div>
+      </form> -->
+      <p class="navbar-text navbar-right" ng-if="!user.uid">未<a ui-sref="book.login" class="navbar-link">登录</a></p>
+      <p class="navbar-text navbar-right" ng-if="user.uid"><span ui-sref="book.userDetail" class="text-danger" style="cursor:pointer">{{user.username}}</span>，欢迎你</p>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+<!-- 登陆框 -->
+<div class="jumbotron loginCtrl">
+  <div class="container">
+    <div class="page-header">
+      <h3>欢迎登录</h3>
+    </div>
+    <div class="row content">
+      <div class="col-md-6 content-left">
+        <img src="statics/book/images/loginBg.png" height="408" width="646" alt="">
+        <div class="text-default content-text-1">
+          对图书倾注的爱，就是对才智的爱<p class="text-primary">——德伯里</p>
+        </div>
+        <div class="text-default content-text-2">
+          书籍是前人的经验<p class="text-primary">——拉布雷</p>
+        </div>
+      </div>
+      <!-- 登陆框 当前无登录用户-->
+      <div class="panel panel-default col-md-5" ng-if="!user">
+        <div class="panel-heading">
+          <h6>登录</h6>
+        </div>
+        <div class="panel-body bg-info">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">用户名</span>
+              <input type="text" class="form-control" placeholder="用户名长度在2-20个字符之间" ng-model="person.username" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">密码</span>
+              <input type="password" class="form-control" placeholder="密码长度在4-20个字符之间" ng-model="person.password" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group col-sm-offset-1">
+              <label><input type="checkbox">请记住我</label>
+            </div>
+          </div>
+          <div class="form-group">
+             <button type="submit" class="btn btn-primary btn-block" ng-click="login()">登录</button>
+          </div>
+          
+        </div>
+      </div>
+      <!-- 当前有用户登录 -->
+      <div class="panel panel-default col-md-5 content-logout" ng-if="user">
+        <div class="panel-heading">
+          <h6>登录</h6>
+        </div>
+        <div class="panel-body bg-info">
+          <p class="text-center">当前登录用户是<span class="text-danger">{{user.username}}</span></p>
+          <p><button class="btn btn-primary btn-block" ng-click="logout()">切换用户</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

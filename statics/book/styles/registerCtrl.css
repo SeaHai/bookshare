@@ -1,0 +1,30 @@
+.registerCtrl .content-left img{
+  margin: 0 auto;
+  max-width: 100%;
+}
+.registerCtrl .content-left div{
+  writing-mode:tb-rl;
+  position: absolute;
+  top: 10%;
+  font-size: 21px;
+  height: 100%;
+}
+.registerCtrl .content-left div>p{
+  position: absolute;
+  bottom: 20%;
+}
+.registerCtrl .content-text-1{
+  right: 17%;
+}
+.registerCtrl .content-text-2{
+  right: 28%;
+}
+.registerCtrl .content-right{
+  padding: 23% 0;
+}
+.registerCtrl .content-logout{
+  margin-top: 8%;
+}
+.registerCtrl .panel{
+  padding: 0;
+}

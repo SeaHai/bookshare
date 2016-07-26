@@ -1,0 +1,138 @@
+<div class="wtitle">上传</div>
+<!-- Static navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+      </button>
+      <a class="navbar-brand" ui-sref="book.home"></a>
+    </div>
+    <div class="navbar-collapse collapse navbar-right">
+      <ul class="nav navbar-nav">
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.register">注册</button>
+        </li>
+        <li>
+          <button type="button" class="btn btn-default navbar-btn" ui-sref="book.login">登录</button>
+        </li>
+        <li><a ui-sref="book.home">首页</a></li>
+        
+        <li><a href="#" ng-click="goUserDetail()">个人中心</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">帮助 <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a ui-sref="book.upload" title="若未登录，上传功能不可使用">上传</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页下载;若未登录，下载功能不可使用">下载</a></li>
+            <li><a title="请点击书籍或笔记，进入详情页评论;若未登录，评论功能不可使用">评论</a></li>
+          </ul>
+        </li>
+      </ul>
+      <!-- <form class="navbar-form navbar-left" action="#" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+            <span class="input-group-btn">
+                  <button type="submit" class="btn"><span class="fui-search"></span></button>
+            </span>
+          </div>
+        </div>
+      </form> -->
+      <p class="navbar-text navbar-right" ng-if="!user.uid">未<a ui-sref="book.login" class="navbar-link">登录</a></p>
+      <p class="navbar-text navbar-right" ng-if="user.uid"><span ui-sref="book.userDetail" class="text-danger" style="cursor:pointer">{{user.username}}</span>，欢迎你</p>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</div>
+
+<!-- 正文 -->
+<div class="jumbotron uploadCtrl">
+  <div class="container">
+    <ul class="nav nav-tabs row" role="tablist">
+      <li role="presentation" class="active text-center"><a href="#book" aria-controls="book" role="tab" data-toggle="tab" style="width:200px"><h6>书籍</h6></a></li>
+      <li role="presentation" class="text-center"><a href="#note" aria-controls="note" role="tab" data-toggle="tab"  style="width:200px"><h6>笔记</h6></a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content row">
+      <div role="tabpanel" class="tab-pane active" id="book">
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">书名</label>
+          <div class="col-sm-5">
+            <input type="text" name="title" class="form-control" placeholder="书名长度在2-30个字符之间" ng-model="book.name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">简介</label>
+          <div class="col-sm-5">
+            <small class="pull-right">{{book.intro.length}}/500</small>
+            <textarea class="form-control" rows="5" ng-model="book.intro" placeholder="简介长度在2-500个字符之间"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">分类</label>
+          <div class="col-sm-5">
+            <select class="form-control" ng-model="book.cate">
+              <option value="javascript">javascript</option>
+              <option value="php">php</option>
+              <option value="java">java</option>
+              <option value="mysql">mysql</option>
+              <option value="android">android</option>
+              <option value="linux">linux</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">文件</label>
+          <div class="col-sm-5 file-container">
+            <input type="text" class="form-control" placeholder="请选择文件(.zip/.rar/.doc/.txt/.pdf)" ng-model="book.url">
+            <input type="file" class="form-control" name="bookFile" ng-disabled="!user">
+            <button class="upload btn btn-primary" ng-click="upload('book')" ng-disabled="!user">上传</button>
+            <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label"></label>
+          <div class="col-sm-5">
+            <button class="btn btn-success col-sm-2" ng-click="saveBook()" ng-disabled="!user">确定</button>
+            <button class="btn btn-danger col-sm-2 col-sm-offset-8" ng-click="reset()" ng-disabled="!user">重置</button>
+          </div>
+        </div>
+        
+      </div>
+      <div role="tabpanel" class="tab-pane" id="note">
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">笔记名</label>
+          <div class="col-sm-5">
+            <input type="text" name="title" class="form-control" placeholder="笔记名长度在2-30个字符之间" ng-model="note.name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">简介</label>
+          <div class="col-sm-5">
+            <small class="pull-right">{{note.intro.length}}/500</small>
+            <textarea class="form-control" rows="5" ng-model="note.intro" placeholder="简介长度在2-500个字符之间"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label">文件</label>
+          <div class="col-sm-5 file-container">
+            <input type="text" class="form-control" placeholder="请选择文件(.zip/.rar/.doc/.txt/.pdf)" ng-model="note.url">
+            <input type="file" class="form-control" name="noteFile" ng-disabled="!user">
+            <button class="upload btn btn-primary" ng-click="upload('note')" ng-disabled="!user">上传</button>
+            <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3 text-right control-label"></label>
+          <div class="col-sm-5">
+            <button class="btn btn-success col-sm-2" ng-click="saveNote()" ng-disabled="!user">确定</button>
+            <button class="btn btn-danger col-sm-2 col-sm-offset-8" ng-click="reset()" ng-disabled="!user">重置</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

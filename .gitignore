@@ -1,0 +1,5 @@
+statics/book/bower_components
+node_modules
+uploads
+Runtime
+Application/Common/Conf/config.php
